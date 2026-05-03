@@ -387,6 +387,66 @@ h3 { font-size: 1.05rem !important; font-weight: 600 !important; color: #374151 
 [data-testid="stSelectbox"] > div > div {
     border-radius: 8px !important;
 }
+
+/* ── Mobile hamburger button ──────────────────────────────────── */
+.mob-toggle {
+    display: none;
+    position: fixed;
+    top: 12px; left: 12px;
+    z-index: 10001;
+    background: #1E3A5F;
+    color: #F9FAFB;
+    border: none;
+    border-radius: 8px;
+    width: 40px; height: 40px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    align-items: center; justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,.25);
+    transition: background 0.15s;
+}
+.mob-toggle:hover { background: #2a4f7c !important; }
+.mob-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.45);
+    z-index: 9999;
+    cursor: pointer;
+}
+.mob-overlay.active { display: block !important; }
+
+@media (max-width: 768px) {
+    .mob-toggle { display: flex !important; }
+    section[data-testid="stSidebar"] {
+        position: fixed !important;
+        top: 0 !important; left: 0 !important;
+        height: 100dvh !important;
+        z-index: 10000 !important;
+        transform: translateX(-100%) !important;
+        transition: transform 0.28s cubic-bezier(.4,0,.2,1) !important;
+        width: 260px !important; min-width: 260px !important; max-width: 260px !important;
+        display: flex !important;
+        visibility: visible !important;
+    }
+    section[data-testid="stSidebar"].mob-open {
+        transform: translateX(0) !important;
+    }
+    [data-testid="stMain"] { width: 100% !important; margin-left: 0 !important; }
+    .block-container {
+        padding: 1rem 0.8rem 2rem 0.8rem !important;
+        padding-top: 60px !important;
+        max-width: 100% !important;
+    }
+}
+@media (min-width: 769px) {
+    .mob-toggle  { display: none !important; }
+    .mob-overlay { display: none !important; }
+    section[data-testid="stSidebar"] {
+        transform: translateX(0) !important;
+        position: sticky !important;
+    }
+}
 </style>
 """
 
@@ -3881,7 +3941,40 @@ def main():
         st.session_state.active_page = "home"
         
     render_sidebar()
-        
+
+    st.markdown("""
+<button class="mob-toggle" id="mob-toggle-btn" aria-label="Menüyü aç/kapat" onclick="dssToggleSidebar()">☰</button>
+<div class="mob-overlay" id="mob-overlay" onclick="dssCloseSidebar()"></div>
+<script>
+(function() {
+    var KEY = 'dss_mob_sidebar';
+    function sidebar() { return document.querySelector('section[data-testid="stSidebar"]'); }
+    function overlay() { return document.getElementById('mob-overlay'); }
+    function applyState(open) {
+        var sb = sidebar();
+        if (!sb) { setTimeout(function(){ applyState(open); }, 40); return; }
+        if (open) {
+            sb.classList.add('mob-open');
+            var ov = overlay(); if (ov) ov.classList.add('active');
+        } else {
+            sb.classList.remove('mob-open');
+            var ov2 = overlay(); if (ov2) ov2.classList.remove('active');
+        }
+    }
+    window.dssToggleSidebar = function() {
+        var isOpen = sessionStorage.getItem(KEY) === '1';
+        sessionStorage.setItem(KEY, isOpen ? '0' : '1');
+        applyState(!isOpen);
+    };
+    window.dssCloseSidebar = function() {
+        sessionStorage.setItem(KEY, '0');
+        applyState(false);
+    };
+    applyState(sessionStorage.getItem(KEY) === '1');
+})();
+</script>
+""", unsafe_allow_html=True)
+
     page = st.session_state.active_page
     
     # Routing logic
