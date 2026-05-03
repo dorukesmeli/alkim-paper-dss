@@ -37,13 +37,21 @@ CUSTOM_CSS = """
 
 /* ── Global reset ─────────────────────────────────────────────── */
 html, body, [class*="css"] { font-family: 'Inter', sans-serif !important; }
-#MainMenu { visibility: hidden; }
-footer    { visibility: hidden; }
-header    { visibility: hidden; }
-[data-testid="stDecoration"]          { display: none !important; }
-[data-testid="stStatusWidget"]        { display: none !important; }
+#MainMenu                             { visibility: hidden !important; }
+footer                                { visibility: hidden !important; }
+header                                { visibility: hidden !important; height: 0 !important; }
+[data-testid="stDecoration"]          { display: none !important; visibility: hidden !important; }
+[data-testid="stStatusWidget"]        { display: none !important; visibility: hidden !important; }
+[data-testid="stToolbar"]             { display: none !important; visibility: hidden !important; height: 0 !important; }
+[data-testid="stDeployButton"]        { display: none !important; visibility: hidden !important; }
+[data-testid="stBaseButton-headerNoPadding"] { display: none !important; visibility: hidden !important; }
 .stDeployButton                       { display: none !important; }
-[data-testid="stToolbar"]             { display: none !important; }
+/* Streamlit Cloud floating badge / viewer / manage-app fallback selectors */
+div[class*="viewerBadge"]             { display: none !important; visibility: hidden !important; }
+div[class*="stAppDeployButton"]       { display: none !important; visibility: hidden !important; }
+div[class*="toolbar"]                 { display: none !important; visibility: hidden !important; }
+div[class*="decoration"]              { display: none !important; visibility: hidden !important; }
+div[class*="statusWidget"]            { display: none !important; visibility: hidden !important; }
 /* ── Sidebar always open — fixed position, internal scroll only ─ */
 [data-testid="stSidebarCollapseButton"]{ display: none !important; }
 [data-testid="collapsedControl"]       { display: none !important; }
