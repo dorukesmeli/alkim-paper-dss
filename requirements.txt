@@ -1,0 +1,21 @@
+# Core
+streamlit>=1.28.0
+pandas>=1.5.0
+numpy>=1.24.0
+
+# Visualization
+plotly>=5.15.0
+
+# Excel / export
+openpyxl>=3.1.0
+xlsxwriter>=3.1.0
+
+# Gurobi (exact models only — requires a valid Gurobi license)
+# Install separately if you have a license:
+#   pip install gurobipy
+# or via conda:
+#   conda install -c gurobi gurobi
+gurobipy>=10.0.0
+
+# Optional PDF export
+# reportlab>=4.0.0

@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c \"import ast; [ast.parse\\(open\\(f\\).read\\(\\)\\) for f in ['app.py','solver_wrappers.py','data_utils.py','models/model1.py','models/model2.py']]; print\\('Syntax OK'\\)\")",
+      "Bash(python3 -c \"import ast; [ast.parse\\(open\\(f\\).read\\(\\)\\) for f in ['app.py','solver_wrappers.py','data_utils.py','models/model1.py','models/model2.py','models/heuristic1.py','models/heuristic2.py']]; print\\('All syntax OK'\\)\")",
+      "Bash(python3 -c ' *)",
+      "Bash(pip3 install *)",
+      "Bash(python3 -c \"import streamlit, pandas, numpy, plotly, openpyxl, xlsxwriter; print\\('All core deps OK'\\)\")",
+      "Bash(streamlit run *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8501/)",
+      "Bash(python3 -m streamlit --version)",
+      "Bash(python3 -m streamlit run app.py --server.headless true --server.port 8502)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\" http://localhost:8502/)",
+      "Bash(kill %1)",
+      "Bash(python3 -m streamlit run app.py --server.port 8501)",
+      "Bash(open http://localhost:8501)",
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "Bash(python3 -c \"import ast; ast.parse\\(open\\('/Users/dorukesmeli/Desktop/ALKİM DSS/app.py'\\).read\\(\\)\\); print\\('app.py syntax OK'\\)\")",
+      "Bash(python3)",
+      "Bash(python3 -c \"import ast; ast.parse\\(open\\('app.py'\\).read\\(\\)\\); print\\('✅ Syntax OK'\\)\")",
+      "Bash(pkill -f \"streamlit run\")",
+      "Bash(python3 -)",
+      "Bash(python3 -m py_compile app.py)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8501/healthz)",
+      "Bash(python3 -m py_compile data_utils.py)"
+    ]
+  }
+}
